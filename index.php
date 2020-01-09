@@ -47,24 +47,35 @@ class Ospite extends Persona{
 }
 class Pagante extends Persona{
     public $indirizzoFatturazione;
+    public $indirizzoResidenza;
 
-    function __construct($nome, $cognome, $indirizzoFatturazione)
+    function __construct($nome, $cognome, $indirizzoFatturazione , $indirizzoResidenza )
     {
 
         parent::__construct($nome, $cognome);
         $this-> indirizzoFatturazione = $indirizzoFatturazione;
+        $this-> indirizzoResidenza = $indirizzoResidenza;
     }
 
     public function __toString()
     {
-
-       return parent::__toString()."<br> IndirizzoFatturazione :".$this->indirizzoFatturazione;
+        if($this->indirizzoFatturazione ===  $this->indirizzoResidenza || $this->indirizzoFatturazione === "" || $this->indirizzoResidenza === ""){
+            if($this->indirizzoFatturazione === ""){
+                return parent::__toString() . "<br> Indirizzo di fatturazione e di residenza coincidono :" . $this->indirizzoResidenza;
+            } else if ($this->indirizzoResidenza === "") {
+                return parent::__toString()."<br> Indirizzo di fatturazione e di residenza coincidono :".$this->indirizzoFatturazione;
+            }
+        } else{
+            return parent::__toString(). "<br> Indirizzo di residenza : ".$this->indirizzoResidenza ." <br>" . "Indirizzo di fatturazione : " . $this->indirizzoFatturazione;
+        }
     }
 
 }
 
 echo "<br>---------------<br>";
 $persona = new Persona("Marco","Rispoli");
+$test = $persona -> nome;
+echo $test;
 echo "Persona"."<br>";
 echo $persona;
 echo "<br>---------------<br>";
@@ -72,6 +83,9 @@ $ospite = new Ospite("Elena","Fierro","04/12/1991");
 echo "Ospite"."<br>";
 echo $ospite;
 echo "<br>---------------<br>";
-$pagante = new Pagante("Paperon","De Paperoni","Via fuori i soldi");
+$pagante = new Pagante("Paperon","De Paperoni", "", "Via fuori i soldi 18");
 echo "Pagante"."<br>";
 echo $pagante;
+if($ospite -> nome == $pagante -> nome && $ospite-> cognome == $pagante-> cognome){
+echo "<br> Ospite e pagante sono la stessa persona";
+};
