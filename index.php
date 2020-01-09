@@ -34,12 +34,13 @@ class Ospite extends Persona{
     {
 
         parent::__construct($nome, $cognome);
+       
         $this-> annoDiNascita = $annoDiNascita;
     }
 
     public function __toString()
     {
-
+        
        return parent::__toString()."<br> Anno di Nascita :".$this->annoDiNascita;
     }
 
@@ -64,7 +65,7 @@ class Pagante extends Persona{
 
 echo "<br>---------------<br>";
 $persona = new Persona("Marco","Rispoli");
-echo "Persona prossimamente famosa"."<br>";
+echo "Persona"."<br>";
 echo $persona;
 echo "<br>---------------<br>";
 $ospite = new Ospite("Elena","Fierro","04/12/1991");
