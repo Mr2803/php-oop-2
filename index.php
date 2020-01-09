@@ -73,19 +73,23 @@ class Pagante extends Persona{
 }
 
 echo "<br>---------------<br>";
+
 $persona = new Persona("Marco","Rispoli");
-$test = $persona -> nome;
-echo $test;
-echo "Persona"."<br>";
+echo "<b>Persona</b>"."<br>";
 echo $persona;
+
 echo "<br>---------------<br>";
+
 $ospite = new Ospite("Elena","Fierro","04/12/1991");
-echo "Ospite"."<br>";
+echo "<b>Ospite</b>"."<br>";
 echo $ospite;
+
 echo "<br>---------------<br>";
-$pagante = new Pagante("Paperon","De Paperoni", "", "Via fuori i soldi 18");
-echo "Pagante"."<br>";
+
+$pagante = new Pagante("Elena","Fierro", "", "Via fuori i soldi 18");
+echo "<b>Pagante</b> <br>";
 echo $pagante;
-if($ospite -> nome == $pagante -> nome && $ospite-> cognome == $pagante-> cognome){
-echo "<br> Ospite e pagante sono la stessa persona";
+
+if($ospite -> nome == $pagante -> nome && $ospite->cognome == $pagante->cognome){
+    echo "<br> <b>Ospite e pagante sono la stessa persona</b>";
 };
