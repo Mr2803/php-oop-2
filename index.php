@@ -8,57 +8,77 @@
 <?php
 
 class Persona {
-    public $nome;
-    public $cognome;
+    private $nome;
+    private $cognome;
 
     function __construct($nome, $cognome){
 
         // valorizzazione variabili tramite parametri
-        $this-> nome = $nome;
-        $this-> cognome = $cognome;
+        $this-> setName($nome);
+        $this-> setLastname($cognome);
     }
+
+    //funzioni get&set
+    function getName() {return $this -> nome;} 
+    function setName($nome){return $this -> nome = $nome;}
+    function getLastname() {return $this -> cognome;} 
+    function setLastname($cognome){return $this -> cognome = $cognome;}
 
     function __toString(){
 
         /* rappresentazione testuale dell'oggetto */
-        return "Nome :". $this->nome . "<br>" ."Cognome :". $this->cognome ;
+        return "Nome :".$this-> getName() . "<br>" ."Cognome :". $this-> getLastname() ;
     } 
 }
 
 class Ospite extends Persona{
-    public $annoDiNascita;
+    private $annoDiNascita;
 
     function __construct($nome, $cognome, $annoDiNascita){
 
         parent::__construct($nome, $cognome);
        
-        $this-> annoDiNascita = $annoDiNascita;
+        $this-> setDateOfBirth($annoDiNascita);
     }
+
+    //funzioni get&set
+    function getDateofBirth(){return $this-> annoDiNascita;}
+    function setDateOfBirth($annoDiNascita){return $this-> annoDiNascita = $annoDiNascita;}
 
     function __toString(){
         
-       return parent::__toString()."<br> Anno di Nascita :".$this->annoDiNascita;
+       return parent::__toString()."<br> Anno di Nascita :".$this->getDateofBirth();
     }
 
 }
 class Pagante extends Persona{
-    public $indirizzoFatturazione;
-    public $indirizzoResidenza;
+    private $indirizzoFatturazione;
+    private $indirizzoResidenza;
 
-    function __construct($nome, $cognome, $indirizzoFatturazione  , $indirizzoResidenza ){
+    function __construct($nome, $cognome, $indirizzoFatturazione , $indirizzoResidenza ){
 
         parent::__construct($nome, $cognome);
         $this-> indirizzoFatturazione = $indirizzoFatturazione;
         $this-> indirizzoResidenza = $indirizzoResidenza;
     }
 
+    //funzioni get&set
+    function getIndFatt(){ return $this-> indirizzoFatturazione;}
+    function setIndFatt($indirizzoFatturazione){return $this->indirizzoFatturazione = $indirizzoFatturazione;}
+    function getIndResidenza(){ return $this-> indirizzoResidenza;}
+    function setIndResidenza($indirizzoResidenza){return $this-> indirizzoResidenza = $indirizzoResidenza;}
+
+    //useful function
+    function comparisonAddress(){
+        if ($this->getIndResidenza() ===  $this->getIndFatt()) {
+            return "<br> Indirizzo di fatturazione e di residenza coincidono :" . $this->getIndResidenza();
+        } else {
+            return "<br> Indirizzo di residenza : " . $this->getIndResidenza() . " <br>" . "Indirizzo di fatturazione : " . $this->getIndFatt();
+        } 
+    }
+
     function __toString(){
-        if($this->indirizzoFatturazione ===  $this->indirizzoResidenza){
-            return parent::__toString() . "<br> Indirizzo di fatturazione e di residenza coincidono :" . $this->indirizzoResidenza;
-            
-        } else{
-            return parent::__toString(). "<br> Indirizzo di residenza : ".$this->indirizzoResidenza ." <br>" . "Indirizzo di fatturazione : " . $this->indirizzoFatturazione;
-        }
+        return parent::__toString() . $this -> comparisonAddress();
     }
 
 }
@@ -77,10 +97,10 @@ echo $ospite;
 
 echo "<br>---------------<br>";
 
-$pagante = new Pagante("Paperon","De' Paperoni", "Via fuori i soldi 19", "Via fuori i soldi 19");
+$pagante = new Pagante("Elena","Fierro", "Via fuori i soldi 19", "Via fuori i soldi 18");
 echo "<b>Pagante</b> <br>";
 echo $pagante;
 
-if($ospite -> nome === $pagante -> nome && $ospite->cognome === $pagante->cognome){
+if($ospite -> getName() === $pagante -> getName() && $ospite -> getLastname() === $pagante-> getLastname()){
     echo "<br> <b>Ospite e pagante sono la stessa persona</b>";
 };
